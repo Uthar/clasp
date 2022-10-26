@@ -23,18 +23,11 @@ let
     pname = "clasp-repos";
     version = "tarball";
     inherit src;
-    nativeBuildInputs = (with pkgs; [
+    nativeBuildInputs = with pkgs; [
       sbcl
       git
       cacert
-      pkg-config
-      fmt
-      gmpxx
-      tree #TODO remove
-    ]) ++ (with pkgs.llvmPackages_14; [
-      llvm
-      clang
-    ]);
+    ];
     buildPhase = ''
       export SOURCE_DATE_EPOCH=1
       export ASDF_OUTPUT_TRANSLATIONS=$(pwd):$(pwd)/__fasls
@@ -61,7 +54,6 @@ in pkgs.llvmPackages_14.stdenv.mkDerivation {
   nativeBuildInputs = (with pkgs; [
     sbcl
     git
-    cacert
     pkg-config
     fmt
     gmpxx
@@ -82,10 +74,10 @@ in pkgs.llvmPackages_14.stdenv.mkDerivation {
       --cc=$NIX_CC/bin/cc \
       --cxx=$NIX_CC/bin/c++ \
       --reproducible-build \
-      --package-path=$out \
-      --bin-path=/bin \
-      --lib-path=/lib \
-      --share-path=/share
+      --package-path=/ \
+      --bin-path=$out/bin \
+      --lib-path=$out/lib \
+      --share-path=$out/share
   '';
   buildPhase = ''
     ninja -C build
