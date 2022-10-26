@@ -6,8 +6,8 @@ let
   src = pkgs.fetchFromGitHub {
     owner = "clasp-developers";
     repo = "clasp";
-    rev = "50a3ad63d906ad1bbfc5199fa2d9ff62ac95f815";
-    hash = "sha256-q1ZZdRoEDWwm71l9ulG5VCFkJZyOX3z39mZ1t9xpZQk=";
+    rev = "2.0.0";
+    hash = "sha256-McKEPnQ8PNm++KTvuEq6otpBp4oDvnPyS6NXI1Pi2Cg=";
   };
 
   reposDirs = [
@@ -46,10 +46,9 @@ let
     outputHash = "sha256-3q8l7+FNytEZYADSV6FWgsNKX15dUJ6C6kKE/Blefbc=";
   };
 
-in pkgs.llvmPackages_14.stdenv.mkDerivation {
-  
+in pkgs.llvmPackages_14.stdenv.mkDerivation { 
   pname = "clasp";
-  version = "2.0.0-pre";  
+  version = "2.0.0";  
   inherit src;
   nativeBuildInputs = (with pkgs; [
     sbcl
